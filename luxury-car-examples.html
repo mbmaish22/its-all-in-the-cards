@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Luxury Car Brands - Prestige Motors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Holy Grail Layout */
+        .container {
+            display: grid;
+            grid-template-areas:
+                "header header header"
+                "aside article article"
+                "footer footer footer";
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 250px 1fr 1fr;
+            min-height: 100vh;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            grid-area: header;
+            background: linear-gradient(45deg, #d4af37, #f4e5b1);
+            color: #1a1a1a;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header p {
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        aside {
+            grid-area: aside;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        aside h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+
+        aside nav ul {
+            list-style: none;
+        }
+
+        aside nav li {
+            margin: 15px 0;
+        }
+
+        aside nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.1em;
+            padding: 12px 20px;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        aside nav a:hover {
+            background: linear-gradient(45deg, #d4af37, #f4e5b1);
+            color: #1a1a1a;
+            border-color: #d4af37;
+            transform: translateX(5px);
+        }
+
+        article {
+            grid-area: article;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        article h2 {
+            color: #d4af37;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Flip Cards Styles */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 450px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #d4af37, #f4e5b1);
+            color: #1a1a1a;
+            transform: rotateY(180deg);
+            padding: 25px;
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+        }
+
+        .brand-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .brand-tagline {
+            font-size: 1.1em;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        .flip-card-back h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 8px;
+        }
+
+        .flip-card-back p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .brand-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(26, 26, 26, 0.3);
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 6px 0;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        footer {
+            grid-area: footer;
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+            color: #d4af37;
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-areas:
+                    "header"
+                    "aside"
+                    "article"
+                    "footer";
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .flip-card {
+                height: 400px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            article {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Premium Luxury Car Brands</h1>
+            <p>Discover the World's Most Prestigious Automotive Marques</p>
+        </header>
+
+        <aside>
+            <h2>Navigation</h2>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#brands">Premium Brands</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <article>
+            <h2>Explore Legendary Automotive Brands</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 20px; color: #666;">Hover over each card to discover the rich heritage and exceptional craftsmanship behind these iconic luxury automotive marques.</p>
+            
+            <div class="cards-container">
+                <!-- Rolls-Royce Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">RR</div>
+                            <div class="brand-name">Rolls-Royce</div>
+                            <div class="brand-tagline">"The Best Car in the World"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Rolls-Royce Motor Cars</h3>
+                            <p>Founded in 1904 by Charles Rolls and Henry Royce, Rolls-Royce represents the absolute pinnacle of luxury automotive craftsmanship. Each vehicle is meticulously hand-built in Goodwood, England, combining traditional British craftsmanship with cutting-edge technology.</p>
+                            <p>Known for their whisper-quiet cabins, sumptuous interiors featuring the finest leather and wood veneers, and the iconic Spirit of Ecstasy hood ornament, Rolls-Royce continues to set the standard for automotive luxury.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1904</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Goodwood, UK</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>Phantom</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ferrari Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">🐎</div>
+                            <div class="brand-name">Ferrari</div>
+                            <div class="brand-tagline">"Passion, Performance, Precision"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Ferrari S.p.A.</h3>
+                            <p>Established in 1939 by Enzo Ferrari, this legendary Italian marque embodies the perfect fusion of racing heritage and road car excellence. Every Ferrari is a testament to Italian passion, featuring naturally aspirated V8 and V12 engines that produce an unmistakable symphony.</p>
+                            <p>From the iconic 250 GTO to the modern LaFerrari hybrid hypercar, Ferrari continues to push the boundaries of automotive performance while maintaining their distinctive prancing horse legacy and Rosso Corsa red heritage.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1939</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Maranello, Italy</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>F8 Tributo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lamborghini Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">🐂</div>
+                            <div class="brand-name">Lamborghini</div>
+                            <div class="brand-tagline">"Expect the Unexpected"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Automobili Lamborghini</h3>
+                            <p>Born in 1963 from Ferruccio Lamborghini's desire to create the perfect grand touring car, Lamborghini represents Italian automotive artistry at its most dramatic. Known for their angular, aggressive designs and powerful V10 and V12 engines.</p>
+                            <p>From the revolutionary Miura to the modern Huracán and Aventador, Lamborghini vehicles feature distinctive scissor doors, bold styling, and uncompromising performance that makes every drive an unforgettable experience.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1963</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Sant'Agata, Italy</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>Huracán</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Porsche Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">P</div>
+                            <div class="brand-name">Porsche</div>
+                            <div class="brand-tagline">"There is No Substitute"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Dr. Ing. h.c. F. Porsche AG</h3>
+                            <p>Founded in 1931 by Ferdinand Porsche, this German manufacturer has perfected the art of creating sports cars that excel both on the road and track. The iconic 911, with its distinctive silhouette and rear-engine layout, remains the benchmark for sports car engineering.</p>
+                            <p>Porsche's philosophy of continuous evolution rather than revolution has resulted in vehicles that offer exceptional performance, reliability, and everyday usability, making them the choice of driving enthusiasts worldwide.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1931</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Stuttgart, Germany</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>911 Carrera</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bentley Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">B</div>
+                            <div class="brand-name">Bentley</div>
+                            <div class="brand-tagline">"Extraordinary Journeys"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Bentley Motors Limited</h3>
+                            <p>Established in 1919 by W.O. Bentley, this British luxury marque combines handcrafted interiors with powerful performance. Each Bentley represents a commitment to craftsmanship, featuring hand-stitched leather, carefully selected wood veneers, and precision-engineered powertrains.</p>
+                            <p>From the racing heritage of the 1920s Le Mans victories to modern grand tourers like the Continental GT, Bentley creates vehicles that offer both luxury and performance for the most discerning clientele.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1919</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Crewe, England</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>Continental GT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aston Martin Card -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="brand-logo">AM</div>
+                            <div class="brand-name">Aston Martin</div>
+                            <div class="brand-tagline">"Power, Beauty & Soul"</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>Aston Martin Lagonda</h3>
+                            <p>Founded in 1913, Aston Martin epitomizes British automotive elegance and performance. Famous as James Bond's vehicle of choice, these handcrafted grand tourers combine sophisticated design with powerful V8 and V12 engines.</p>
+                            <p>Each Aston Martin is built with meticulous attention to detail at their Gaydon facility, featuring sumptuous interiors, distinctive exterior styling, and the unmistakable sound of their naturally aspirated engines that creates an emotional connection between driver and machine.</p>
+                            <div class="brand-details">
+                                <div class="detail-item">
+                                    <span>Founded:</span>
+                                    <span>1913</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Headquarters:</span>
+                                    <span>Gaydon, England</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Signature Model:</span>
+                                    <span>DB11</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            <p>&copy; 2025 Prestige Motors - Where Automotive Dreams Become Reality</p>
+        </footer>
+    </div>
+</body>
+</html>
